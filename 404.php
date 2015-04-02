@@ -117,8 +117,10 @@ function buildcache($dirname = "swf/") #choose directory and add ./ to start if 
     $cache = fopen('404cache', 'a'); #may not totally work if the file does not exist
     ftruncate($cache, 0); #kill the cache
     if ($handle = opendir($dirname)) {
+    	$first = true;
         while (false !== ($file = readdir($handle))) { #loop through all files in the folder
             if (eregi($pattern, $file)) {
+            	if ($first == false) fwrite($cache, "\r\n"); #write a carrige return to file unless this is the first loop
                 #$myimages[] = $dirname . $file;
                 $info  = getimagesize($dirname . $file); #grab the meta from the flash
                 #FOR SMALL POS FLASH FILES. MAKE THEM BIG!(or smaller if too big as a nice biproduct)
@@ -129,7 +131,8 @@ function buildcache($dirname = "swf/") #choose directory and add ./ to start if 
                 #crank dat souja boi
                 $info[1] = $info[1] * $multi;
                 $info[0] = $info[0] * $multi;
-                fwrite($cache, $dirname . $file . "|width=" . $info[0] . "|height=" . $info[1] . "\r\n"); #write to array.
+                fwrite($cache, $dirname . $file . "|width=" . $info[0] . "|height=" . $info[1]); #write to array.
+                $first = false;
             }
         }
         closedir($handle); #BE KIND. CLOSE HANDLES
