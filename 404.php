@@ -75,9 +75,9 @@ function returnswf() #do this to pump out a flash from the cache file
     	{
     		$rando = $flash;
     	}
-        echo '<center><div class="embed-wrapper"><div class="arve-embed-container"><object ' . $height[$rando] . $width[$rando] . ' data="http://nervesocket.com/' . $URL[$rando] . '"></object></center></div></div>'; #flash embed. array indexes for url and meta should match
+        echo '<center><div class="embed-wrapper"><div class="arve-embed-container"><object ' . $height[$rando] . $width[$rando] . ' data="' . $URL[$rando] . '"></object></center></div></div>'; #flash embed. array indexes for url and meta should match
         #echo '<div style="font-size: 1px;"><a href="http://nervesocket.com/' . $URL[$rando] . '">' . $URL[$rando] . '</a></div>'; #link for download
-        echo '<br><div style="font-size: 8px;"><a href=\'http://nervesocket.com/' . $URL[$rando] . '\' download="flash.swf"><input type="button" value="Download Flash" /></a> <a href="http://'.$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF].'?&f='.$rando.'">Direct Link</a></div>'; #download button for download and direct link
+        echo '<br><div style="font-size: 8px;"><a href=\'' . $URL[$rando] . '\' download="flash.swf"><input type="button" value="Download Flash" /></a> <a href="http://'.$_SERVER[HTTP_HOST].$_SERVER[PHP_SELF].'?&f='.$rando.'">Direct Link</a></div>'; #download button for download and direct link
     } else {
         echo "<center><img src=http://i.imgur.com/GNm9aP4.png border=0></center>";
         echo "Seriously though, first a 404 and now he has no funny flash videos to cycle through...";
@@ -108,7 +108,7 @@ function returnimg($dirname = "./swf/")
     }
 }
 
-function buildcache($dirname = "swf/") #choose directory and add ./ to start if pulling from local
+function buildcache($dirname = "./swf/") #choose directory and add ./ to start if pulling from local
 {
     $pattern  = "\.(swf)$"; #setup filter for file types. not sure what would happen if an image was selected but maybe future project for images
     $files    = array();
